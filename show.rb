@@ -18,6 +18,7 @@ class Show
   end
 
   def select_show(num)
+    num = num.to_i
     puts "You selected #{@show_list[num-1].content}"
     @show_link = @show_list[num-1].first[1]
   end
