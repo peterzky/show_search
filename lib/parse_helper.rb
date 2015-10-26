@@ -15,12 +15,12 @@ module ParseHelper
       show_list
     end
 
-  def matchurl(patten,url)
+  def matchurl(pattern,url)
     show_list = Array.new
     ascii_url = URI::escape(url)
     doc = Nokogiri::HTML(open(ascii_url))
     doc.css('a').each do |link|
-      show_list << link if link.first[1] =~ Regexp.new(patten)
+      show_list << link if link.first[1] =~ Regexp.new(pattern)
       end
       show_list
     end

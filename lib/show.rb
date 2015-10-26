@@ -26,9 +26,32 @@ class Show
   def episode
     if @show_link != nil
       @episode_list = matchurl("ed2k",@show_link)
-      @episode_list.map {|link| puts "#{link.content}\n#{link.first[1]}"}
+      @episode_list.each_with_index do |link,idx|
+        puts "#{idx}|#{link.content}|#{link.first[1][0..30]}"
+        puts "----------------------------------------------"
+      end
     else puts "Please select a season first!"
     end
+  end
+
+  def filter_result(pattern)
+    @filtered = Array.new
+    if pattern == nil
+      return @filtered = @episode_list
+    end
+    @episode_list.each do |link|
+      @filtered << link if link.content =~ Regexp.new(pattern.to_s)
+    end
+    @filtered.map {|link| puts link.content}
+  end
+
+  def copylink
+    episodes = Array.new
+    @filtered.each do |episode|
+      episodes << episode.first[1]
+    end
+      cli = "echo '" + episodes.join("\n") + "' | pbcopy"
+      IO.popen(cli) {|f| puts f.gets}
   end
 
 end
