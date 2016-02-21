@@ -1,6 +1,6 @@
 # Search TV shows on cn163.net
 
-- add ui
+- Thor
 - add search history
 - add local database
-- download 
+- download
